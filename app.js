@@ -7,7 +7,11 @@ const io = require('socket.io')(server);
 io.origins(['https://me-jsramverk.rinnegard.me/']);
 
 io.on('connection', function (socket) {
-    console.info("User connected");
+    io.emit('new user', {
+        username: "Server Message",
+        message: "New user connected",
+        time: Date.now()
+    });
 
     socket.on('chat message', function (message) {
         io.emit('chat message', message);
