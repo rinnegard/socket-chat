@@ -9,12 +9,8 @@ io.origins(['https://me-jsramverk.rinnegard.me:443']);
 io.on('connection', function (socket) {
     console.info("User connected");
 
-    socket.on('connect', function (message) {
-        io.emit('new user', {
-            username: "Server Message",
-            message: "New user connected",
-            time: Date.now()
-        });
+    socket.on('new user', function (message) {
+        io.emit('new user', message);
     });
 
     socket.on('chat message', function (message) {
