@@ -15,6 +15,11 @@ io.on('connection', function (socket) {
 
     socket.on('chat message', function (message) {
         io.emit('chat message', message);
+        io.emit('new user', {
+            username: "Server Message",
+            message: "New user connected",
+            time: Date.now()
+        });
     });
 });
 
