@@ -18,12 +18,13 @@ mongo.connect('mongodb://localhost:27017', function(error, client){
         let db = client.db('chat');
         let messages = db.collection('messages');
 
-        messages.find().toArray(function(error, res){
-            if(error){
-                throw err;
-            }
-
-            io.emit('messages', res);
+        socket.on('load', function (message) {
+            messages.find().toArray(function(error, res){
+                if(error){
+                    throw err;
+                }
+                io.emit('messages', res);
+            });
         });
 
         socket.on('new user', function (message) {
