@@ -8,13 +8,14 @@ const io = require('socket.io')(server);
 
 io.origins(['https://me-jsramverk.rinnegard.me:443']);
 
-mongo.connect('mongodb://localhost:27017/chat', function(error, db){
+mongo.connect('mongodb://localhost:27017', function(error, client){
     if(error){
         throw error;
     }
     console.log("Mongo Connected");
     io.on('connection', function (socket) {
         console.info("Socket connected");
+        let db = client.db('chat');
         let messages = db.collection('messages');
 
         messages.find().toArray(function(error, res){
