@@ -31,7 +31,7 @@ mongo.connect('mongodb://localhost:27017', function(error, client){
         });
 
         socket.on('chat message', function (message) {
-            chat.insert({message}, function(){
+            messages.insert({message}, function(){
                 io.emit('chat message', message);
             });
 
