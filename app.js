@@ -32,7 +32,11 @@ mongo.connect('mongodb://localhost:27017', function(error, client){
         });
 
         socket.on('chat message', function (message) {
-            messages.insert({message}, function(){
+            messages.insert({
+                 username: message.username,
+                 message: message.message,
+                 time: message.time,
+             }, function(){
                 io.emit('chat message', message);
             });
 
